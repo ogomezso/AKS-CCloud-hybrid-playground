@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: basic-schema-config
+  namespace: confluent
+data:
+  schema: |
+    {
+      "namespace": "io.confluent.examples.clients.basicavro",
+      "type": "record",
+      "name": "basic",
+      "fields": [
+        {"name": "id", "type": "string"},
+        {"name": "amount", "type": "double"},
+        {"name": "email", "type": "string"}
+      ]
+    }
