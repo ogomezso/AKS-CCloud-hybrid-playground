@@ -124,12 +124,6 @@ and create the proper secret from this file:
 kubectl -n confluent create secret generic c3-basic-secret --from-file ${DIR}/basic.txt
 ```
 
-On this basic deployment all components are not exposed to external access so if you need to access to a specfic one you will need to port-forward the pod in which it's running. Take Control Center as example:
-
-```bash
-kubectl port-forward controlcenter-0 9021:9021
-```
-
 > NOTES:
 > filenames are mandatory to be as we show in the document if not it will fail on runtime
 > Under `confluent/secrets` folder you will find several sh scripts that you can use to create the secrets described
@@ -158,6 +152,12 @@ you just need to run:
 
 ```bash
 kubectl apply -f confluent/<CR_FILENAME>
+```
+
+On this basic deployment all components are not exposed to external access so if you need to access to a specfic one you will need to port-forward the pod in which it's running. Take Control Center as example:
+
+```bash
+kubectl port-forward controlcenter-0 9021:9021
 ```
 
 #### Specific considerations
