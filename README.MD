@@ -61,7 +61,11 @@ password=<CCLOUD CLUSTER/SR API SECRET>
 ```
 
 ```bash
-kubectl -n confluent create secret generic restclass-ccloud/ccloud-sr-credentials --from-file ${DIR}/basic.txt
+kubectl -n confluent create secret generic restclass-ccloud --from-file ${DIR}/basic.txt
+```
+
+```bash
+kubectl -n confluent create secret generic ccloud-sr-credentials --from-file ${DIR}/basic.txt
 ```
 
 2. **Password Encoder**: Secret needed to encrypt/decrypt passwords sent between brokers and schema registry (and in general within the entire Confluent Platform). This secret is created again from a text file:
@@ -103,8 +107,31 @@ confluent kafka cluster describe
 
 make sure that you are using the proper environment and cluster.
 
-> NOTE: filenames are mandatory to be as we show in the document if not it will fail on runtime
+5. **Control Center Basic Authentication secret**: Since Control Center UI that can manage all your cluster, event on this basic setup,  take in count that **at least** you should implement a `basic user/password` authentication. 
 
+You will need to set up a `Kubernetes secret`containing the user, password and role (this one should match with the ones declared on the Control Center CR) of the users you want to gran access to Control Center UI.
+
+In order to do that you need to setup a text file looking like this:
+
+```txt
+c3admin: password1,Administrators
+c3restricted: password2,Restricted
+```
+
+and create the proper secret from this file:
+
+```bash
+kubectl -n confluent create secret generic c3-basic-secret --from-file ${DIR}/basic.txt
+```
+
+On this basic deployment all components are not exposed to external access so if you need to access to a specfic one you will need to port-forward the pod in which it's running. Take Control Center as example:
+
+```bash
+kubectl port-forward controlcenter-0 9021:9021
+```
+
+> NOTES:
+> filenames are mandatory to be as we show in the document if not it will fail on runtime
 > Under `confluent/secrets` folder you will find several sh scripts that you can use to create the secrets described
 
 ### CFK Platform
