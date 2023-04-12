@@ -7,8 +7,8 @@ spec:
   kafkaClusterRef:
     name: kafka
   kafkaRest:
-    endpoint: https://pkc-0koqq.westeurope.azure.confluent.cloud:443 
-    kafkaClusterID: lkc-nw98pv
+    endpoint: https://pkc-d3rr1.us-east-1.aws.confluent.cloud:443
+    kafkaClusterID: lkc-1jq7zv
     authentication:
       type: basic
       basic:

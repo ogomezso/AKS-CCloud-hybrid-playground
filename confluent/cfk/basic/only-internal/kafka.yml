@@ -16,3 +16,11 @@ spec:
     secretRef: password-encoder-secret
   storageClass:
     name: cfk-sc
+  services:
+    kafkaRest:
+      authentication:
+        type: basic
+        basic:
+          secretRef: credential
+          roles:
+            - Administrators

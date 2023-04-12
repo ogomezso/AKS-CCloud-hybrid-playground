@@ -38,9 +38,13 @@ spec:
         secretRef: jaasconfig-ccloud
     tls:
       enabled: true
-#      secretRef: ccloud-tls-certs
-    bootstrapEndpoint: https://pkc-0koqq.westeurope.azure.confluent.cloud:9092
+      secretRef: ccloud-tls-certs
+    bootstrapEndpoint: pkc-d3rr1.us-east-1.aws.confluent.cloud:9092
   sourceKafkaCluster:
     kafkaRestClassRef:
       name: krc-cfk
       namespace: confluent
+    authentication:
+      type: plain
+      jaasConfig:
+        secretRef: clrestcredential
